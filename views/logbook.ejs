@@ -1,0 +1,326 @@
+<%- include('partials/header'); -%>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+      <%- include('partials/sidebar'); -%> 
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-4 order-xl-1">
+              <div class="card card-profile">
+                <img src="../assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+                <div class="row justify-content-center">
+                  <div class="col-lg-3 order-lg-2">
+                    <div class="card-profile-image" style="margin-top:-40px;">
+                      <a href="#">
+                        <img src="https://sikadir.k-7.monster/assets/img/ava.jpg" class="rounded-circle" id="avatar">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+ 
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col">
+                   
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <h5 class="h3">
+              
+                    </h5>
+                    <div class="h5 font-weight-300">
+                      <i class="ni location_pin mr-2"></i>
+                    </div>
+                    <div class="h5 mt-2">
+
+                    </div>
+                    <div>
+                      <i class="ni education_hat mr-2"></i>Direktorat Jenderal Pengelolaan Hutan Produksi Lestari
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-8 order-xl-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h3 class="mb-0">Informasi Pegawai </h3>
+                    </div>
+          
+                  </div>
+                </div>
+                <div class="card-body">
+                  <form>
+                   
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-username">Nama Pegawai</label>
+                            <div id="nama"></div>
+                          </div>  
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">NIP</label>
+                            <div id="nip"></div>
+                          
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                              <label class="form-control-label" for="input-first-name">Jabatan</label>
+                              <div id="jabatan">-</div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-4">
+                              <div class="form-group">
+                                <label class="form-control-label" for="input-email">Jenis Kelamin</label>
+                                <div id="jenis_kelamin">-</div>
+                              
+                              </div>
+                            </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-last-name">Tempat & Tanggal Lahir</label>
+                            <span id="ttl1">-</span>, <span id="ttl2">-</span>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                              <label class="form-control-label" for="input-last-name">Alamat</label>
+                              <div id="alamat">-</div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Logbook Harian </h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a class="btn btn-sm btn-primary" href="#myModal_form_logbook" data-toggle="modal">Add Logbook</a>
+                </div>
+              </div>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+              <table id=tabel_kehadiran class="table align-items-center table-flush">
+                  <thead class="thead-light"></thead>
+                  <tbody class="list"></tbody>
+                </tbody>
+              </table>
+            </div>
+            
+            <!--<div class="card-footer py-4">
+              <nav aria-label="...">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">
+                      <i class="fas fa-angle-left"></i>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      <i class="fas fa-angle-right"></i>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+  <input type="text" id="get_nip" value="" style="display: none;">    
+  <input type="text" id="kd_skpd" value="" style="display: none;">
+  <input type="text" id="kd_position" value="" style="display: none;"> 
+  <input type="text" id="kd_tupoksi" value="" style="display: none;"> 
+  <%- include('partials/footer'); -%>   
+  </div>
+</body>
+
+</html>
+
+<script>
+
+$( document ).ready(function() {
+  var pathArray = window.location.pathname.split('/');
+  var nip_pegawai = pathArray[2];
+  load_data(nip_pegawai);
+  $('.datepicker').datepicker();
+  $("#header").load("partials/header.ejs"); 
+
+  var nip = $("#get_nip").val(nip_pegawai); 
+
+  $("#avatar").attr("src", 'https://sikadir.k-7.monster/assets/img/'+nip_pegawai+'.jpg');
+  
+  GetTime();
+});
+
+
+function load_data(nip_pegawai){
+  
+  $.getJSON('https://e-kinerja.k-7.monster/logbook?nip='+nip_pegawai, null, function(data) {
+    const thead = $("#tabel_kehadiran thead");
+    const tbody = $("#tabel_kehadiran tbody");
+    let tr = $("<tr />");
+    tr.append("<th scope='col' class='sort'>No</th>")
+    tr.append("<th scope='col' class='sort'>Kode Uraian</th>")
+    tr.append("<th scope='col' class='sort'>Tanggal Logbook</th>")
+    tr.append("<th scope='col' class='sort'>Logbook Harian</th>")
+    tr.append("<th scope='col' class='sort'>Status</th>")
+    tr.appendTo(thead);
+    var no = 1
+    $.each(data, function(_, obj) {
+      tr = $("<tr/>");
+      tr.append("<td>" + no++ + "</td>")
+      //alert(obj.waktu_masuk)
+      //$.each(obj, function(_, text) {
+        tr.append("<td>" + obj.kd_uraian + "</td>")
+      tr.append("<td>" + obj.tgl_kegiatan + "</td>")
+      tr.append("<td>" + obj.uraian_kegiatan + "</td>")
+      if(obj.approve =='0' || obj.approve == null){
+      tr.append("<td><span class='badge badge-pill badge-warning'>Belum Disetujui</span></td>")
+      }else if(obj.approve =='1'){
+      tr.append("<td><span class='badge badge-pill badge-success'>Disetujui</span></td>")  
+      }
+      //});
+      tr.appendTo(tbody);
+    });
+  });
+
+  $.ajax({
+      type: "GET",
+      url: "https://simpeg.k-7.monster/asn?nip="+nip_pegawai,
+      dataType: "json",
+      success: function (data) {
+          var nip = data[0].nip;
+          var nama = data[0].nama;
+          var jenis_kelamin = data[0].jeniskelamin;
+          var tempatlahir = data[0].tempatlahir;
+          var tanggallahir = data[0].tanggallahir;
+          var alamat = data[0].alamat;
+          var jabatan = data[0].jabatan;
+          
+          $("#nip").text(nip);
+          $("#nama").text(nama);
+          $("#jenis_kelamin").text(jenis_kelamin);
+          $("#jabatan").text(jabatan);
+          $("#alamat").text(alamat);
+          $("#ttl1").text(tempatlahir);
+          $("#ttl2").text(tanggallahir);
+        
+      }
+  });
+
+
+  $.getJSON('https://e-kinerja.k-7.monster/skp?nip='+nip_pegawai, null, function(data) {
+    const skp = $("#select_SKP");
+    $.each(data, function(_, obj) {
+      tr = $("<option value="+ obj.id_uraian +">" + obj.uraian_tupoksi + "</option>");
+      tr.appendTo(skp);
+
+      var kd_skpd = $("#kd_skpd").val(obj.kd_skpd); 
+      var kd_position = $("#kd_position").val(obj.kd_position); 
+      var kd_tupoksi = $("#kd_tupoksi").val(obj.id_tupoksi); 
+    });
+  });
+
+}
+
+function post_data_logbook()
+  {
+      var isian_logbook = $("#isian_logbook").val();
+      var id_uraian = $("#select_SKP").val(); 
+      var get_nip = $("#get_nip").val(); 
+      var kd_skpd = $("#kd_skpd").val(); 
+      var kd_position = $("#kd_position").val(); 
+      var kd_tupoksi = $("#kd_tupoksi").val(); 
+      var select_SKP = $('#select_SKP').val();
+      
+      var tanggal = GetTodayDate();
+
+      var kd_kegiatan = "KD_"+GetTime();+"";  
+      
+      /*     var formData = {
+          nip:get_nip,
+          kd_skpd:kd_skpd,
+          kd_position:kd_position,
+          kd_tupoksi:kd_tupoksi,
+          kd_uraian:select_SKP,
+          kd_kegiatan:kd_kegiatan,
+          tgl_kegiatan:tanggal,
+          uraian_kegiatanan:isian_logbook,
+          approve:"0",
+      }; */
+      
+
+      
+      var formData = {
+      nip:get_nip,
+      kd_skpd:kd_skpd,
+      kd_position:kd_position,
+      kd_tupoksi:kd_tupoksi,
+      kd_uraian:select_SKP,
+      kd_kegiatan:kd_kegiatan,
+      tgl_kegiatan:tanggal,
+      uraian_kegiatan:isian_logbook
+    }; 
+          
+      $.ajax({
+        url : "https://e-kinerja.k-7.monster/logbook",
+        type: "POST",
+        dataType:"json",
+        data : formData,
+        success: function(data)
+        {
+          notif_logbook('logbook',get_nip,tanggal);  
+        }
+      });
+  }
+</script>

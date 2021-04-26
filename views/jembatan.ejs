@@ -1,0 +1,267 @@
+<%- include('partials/header'); -%>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+      <%- include('partials/sidebar'); -%> 
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col-xl-4 order-xl-1">
+              <div class="card card-profile">
+                <img src="../assets/img/jb.jpeg" alt="Image placeholder" style="height:325px;">
+              </div>
+            </div>
+            <div class="col-xl-8 order-xl-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h3 class="mb-0">Informasi Jembatan </h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body" style="padding:0.7rem !important;">
+                
+                   
+                    <div class="pl-lg-4">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-username">Nama Jembatan</label>
+                            <div id="nama"></div>
+                          </div>  
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">Kota</label>
+                            <div id="kota"></div>
+                          
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                              <label class="form-control-label" for="input-first-name">Desa</label>
+                              <div id="desa">-</div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-4">
+                              <div class="form-group">
+                                <label class="form-control-label" for="input-email">Lokasi</label>
+                                <div id="alamat">-</div>
+                              
+                              </div>
+                            </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-last-name">Status Kondisi</label>
+                            <div id="status">-</div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                              <label class="form-control-label" for="input-last-name">Tahun Pembangunan</label>
+                              <div id="tahun">-</div>
+                            </div>
+                          </div>
+                      </div><hr style="margin:0px;">
+                      <div class="row">
+                          <div class="col-lg-4" style="padding: 13px; ">
+                          <button class="btn btn-sm btn-success" id="butt_aprrove" onclick="approve();">Approve</button>
+                          <button class="btn btn-sm btn-danger" id="butt_reject" onclick="reject();">Reject</button>
+                          </div>
+                        </div>
+                    </div>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+            
+              <div id="osm-map" style="width:100%;height:450px;"></div>
+            </div>
+           
+            
+    
+          </div>
+        </div>
+      </div>
+
+  <input type="text" id="get_id" value="" style="display: none;">    
+
+  <%- include('partials/footer'); -%>   
+  </div>
+</body>
+
+</html>
+
+<script>
+
+$( document ).ready(function() {
+  var pathArray = window.location.pathname.split('/');
+  var id = pathArray[2];
+  load_data(id);
+  $("#get_id").val(id);
+  $("#header").load("partials/header.ejs"); 
+  getLocation();
+  load_map();
+});
+
+function load_data(id){
+  
+  $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/usulan/"+id,
+      dataType: "json",
+      success: function (data) {
+          var tgl_usulan = data[0].tgl_usulan;
+          var nama = data[0].nama;
+          var kota = data[0].kota;
+          var desa = data[0].desa;
+          var alamat = data[0].alamat;
+          var status = data[0].status;
+          var tahun = data[0].tahun;
+          var lat = data[0].lat;
+          var long = data[0].long;
+          var stat = data[0].stat;
+
+          
+          $("#nama").text(nama);
+          $("#kota").text(kota);
+          $("#desa").text(desa);
+          $("#alamat").text(alamat);
+          $("#status").text(status);
+          $("#tahun").text(tahun);
+
+          if(stat!='0'){
+            $("#butt_aprrove").attr('disabled','disabled');
+            $("#butt_reject").attr('disabled','disabled');
+
+          }
+        
+      }
+  });
+
+
+}
+
+function approve(){
+  var get_id = $("#get_id").val();
+  var stat = '1';
+  var formData = {
+        get_id:get_id,
+        stat:stat
+    }; 
+
+  $.ajax({
+        type: "PUT",
+        url: "http://localhost:3000/update_status",
+        dataType: "json",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+             notifmessage('success-message',get_id)
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(jqXHR);
+            alert('fail' + textStatus.code);
+        }
+         
+    });
+}
+
+function reject(){
+  var get_id = $("#get_id").val();
+  var stat = '2';
+  var formData = {
+        get_id:get_id,
+        stat:stat
+    }; 
+
+  $.ajax({
+        type: "PUT",
+        url: "http://localhost:3000/update_status",
+        dataType: "json",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+          notifreject('success-reject',get_id)
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(jqXHR);
+            alert('fail' + textStatus.code);
+        }
+    });
+}
+
+
+
+function load_map(){
+      // Where you want to render the map.
+var element = document.getElementById('osm-map');
+
+    // Create Leaflet map on map element.
+    var map = L.map(element);
+
+    // Add OSM tile leayer to the Leaflet map.
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Target's GPS coordinates.
+    var target = L.latLng('-6.9206015999999995', '107.6658176 ');
+
+    // Set map's center to target with zoom 14.
+    map.setView(target, 12);
+
+    // Place a marker on the same location.
+    L.marker(target).addTo(map);
+}
+    
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  var lat = $("#latitude").val(position.coords.latitude);
+  var long = $("#longitude").val(position.coords.longitude);
+
+  //notif('success-message')
+  //post_data_absen(position.coords.latitude,position.coords.longitude)
+  //post_data_absen();
+}
+
+
+
+ 
+</script>

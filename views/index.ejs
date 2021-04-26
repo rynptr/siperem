@@ -1,0 +1,154 @@
+
+<%- include('partials/header'); -%>
+<style>
+
+    #videoElement {
+        top: 0;
+        left:0;
+        width: 443px;
+        height: 400px;
+        background-color: #fff;
+    }
+
+</style>
+<body id="body_front" class="bg-default">
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+              <div class="col-xl-12 col-lg-6 col-md-8 px-5">
+              
+             
+              <span class="text-lead text-white"></span> 
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-end">
+        <div class="col-lg-5 col-md-7" style="margin-bottom: 10px;">
+          <div class="card bg-secondary border-0 mb-0">
+            <div class="card-header bg-transparent pb-5" >
+              <div class="text-muted text-center mt-2 mb-3">
+                  <h2><a class="navbar-brand" href="javascript:void(0)">
+                    <img src="../assets/img/logo.png" class="navbar-brand-img" style="height:50px; width:50px;margin-bottom: 10px">
+                  </a>
+                    <div class="text-center mb-4">
+                        <large>Sistem Perencanaan Pembangunan dan Perawatan Jembatan</large>
+                      </div>
+             
+                    </h2>
+                
+              </div>
+            </div>
+            <div class="card-body px-lg-5 py-lg-5" style="padding-top:25px !important;">
+                <div class="text-center mb-4">
+                   
+                  </div>
+             
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Email" type="email" id="email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Password" type="password" id="password">
+                    </div>
+                  </div>
+                  <div class="status" style="text-align:center; color:red;">-</div>
+                  <div class="text-center">
+                      <a class="btn btn btn-warning" href="#myModal_info" data-toggle="modal">Info</a>
+                    <button type="button" class="btn btn-primary my-4" onclick="login();">Sign in</button>
+                  </div>
+           
+              </div>    
+          </div>
+
+        </div>
+
+    
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('partials/footer'); -%>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+
+});  
+
+function login(){
+    var email = $("#email").val(); 
+    var password = $("#password").val(); 
+    
+    var formData = {
+      email:email,
+      password:password,
+    }; 
+
+    $.ajax({
+        url : "http://localhost:3000/login",
+        type: "POST",
+        dataType: "json",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+          
+            
+            console.log('Success!')
+            localStorage.setItem('token', data.token); 
+            notif('login-message'); 
+        },
+        error: function (response)
+        {   
+            $('.status').text(response.responseText);
+            //alert(response.responseText);
+        }
+    });
+
+    //window.location.href = "http://localhost:3000/monitoring/";
+ }
+
+ function notif(status){
+    if (status === 'login-message') {
+        Swal.fire({
+            title: 'Anda Berhasil Login',
+            icon: 'success',
+            showConfirmButton: false,
+            html:
+                'Email dan Password Anda Diterima..' +
+                '<br><br>Redirecting in 2 seconds...', 
+            timer: 2000,
+        })
+        .then(function (result) {
+            window.location.href = "http://localhost:3000/monitoring/";
+        })
+    }else{
+        swal("Error occured !");
+    } 
+    
+    
+  }
+
+
+</script>
+

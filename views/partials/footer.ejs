@@ -1,0 +1,259 @@
+<footer class="py-5" id="footer-main">
+        <div class="container">
+  
+    
+
+              <!-- Modal HTML -->
+        <div id="myModal_form_logbook" class="modal fade">
+          <div class="modal-dialog modal-login">
+              <div class="modal-content">
+                  <div class="modal-header">				
+                      <h5 class="modal-title">Isi Logbook Harian</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                     
+                          <div class="form-group">
+                              <i class="fa fa-list-ul"></i>
+                              <select class="form-control" id="select_SKP">
+                                  <option value="">Pilih SKP</option>
+                              </select> 
+                          </div>
+               
+                          <div class="form-group">
+                              <i class="fa fa-envelope-open"></i>
+                              <textarea class="form-control" id="isian_logbook" placeholder="Isi Pekerjaan" rows="3" required="required"></textarea>					
+                          </div>
+                          <div class="form-group">
+                              <input type="button" class="btn btn-primary btn-block btn-lg" value="Kirim LogBook" onclick="post_data_logbook();">
+                          </div>
+                              
+                      
+                  </div>
+                  <div class="modal-footer">
+                      <a href="#"></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      
+      <div id="myModal_info" class="modal fade">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-header">				
+                    <h5 class="modal-title">Informasi Aplikasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body" style="padding:0px;">
+                   
+                       
+                                <div class="card-header">
+                                  <div class="row align-items-center">
+                                    <div class="col-12">
+                                      <h5 class="mb-0">Login Frontend </h5>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="mb-0">Username Pemda : admin@gmail.com</h5> 
+                                    <h5 class="mb-0">Password : 12345</h5> 
+                                </div>
+                  
+                    
+                </div>
+                <div class="modal-footer">
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      
+      </footer>
+
+<!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Argon JS -->
+  <script src="../assets/js/argon.js?v=1.2.0"></script>
+  <script src="../assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <!-- sweetalert-->
+  <script src="../assets/js/scripts.js"></script>
+
+
+  <script>
+
+  function link_logbook(){
+      var get_nip = $("#get_nip").val(); 
+      window.location.href = "https://sikadir.k-7.monster/logbook/"+get_nip;
+
+  }
+
+  function link_dashboard(){
+      var get_nip = $("#get_nip").val(); 
+      window.location.href = "http://localhost:3000/dashboard/";
+
+  }
+
+  function link_perawatan(){
+      var get_nip = $("#get_nip").val(); 
+      window.location.href = "http://localhost:3000/monitoring/";
+
+  }
+
+  function link_pembangunan(){
+      var get_nip = $("#get_nip").val(); 
+      window.location.href = "http://localhost:3000/pembangunan/";
+
+  }
+
+  function notifmessage(status,get_id){
+
+if (status === 'success-message') {
+  Swal.fire({
+      title: 'Usulan perbaikan diterima !',
+      icon: 'success',
+      showConfirmButton: false,
+      html:
+          'Usulan perbaikan telah diterima',
+      timer: 2000,
+  })
+  .then(function (result) {
+      window.location.href = "../monitoring/"+get_id;
+  })
+} 
+
+if (status === 'success-message-pmb') {
+  Swal.fire({
+      title: 'Usulan pembangunan diterima !',
+      icon: 'success',
+      showConfirmButton: false,
+      html:
+          'Usulan pembangunan telah diterima',
+      timer: 2000,
+  })
+  .then(function (result) {
+      window.location.href = "../view_pembangunan/"+get_id;
+  })
+} 
+}
+
+function notifreject(status,get_id){
+
+if (status === 'success-reject') {
+  Swal.fire({
+      title: 'Usulan perbaikan ditolak !',
+      icon: 'success',
+      showConfirmButton: false,
+      html:
+          'Usulan perbaikan telah ditolak',
+      timer: 2000,
+  })
+  .then(function (result) {
+      window.location.href = "../monitoring/"+get_id;
+  })
+}
+if (status === 'success-reject-pmb') {
+  Swal.fire({
+      title: 'Usulan pembangunan ditolak !',
+      icon: 'success',
+      showConfirmButton: false,
+      html:
+          'Usulan pembangunan telah ditolak',
+      timer: 2000,
+  })
+  .then(function (result) {
+      window.location.href = "../view_pembangunan/"+get_id;
+  })
+}
+}
+
+function notif_ijin(status){
+
+var get_nip = $("#get_nip").val(); 
+
+
+if (status === 'ijin') {
+  Swal.fire({
+      title: 'Ujulan Ijin Hari Terkirim !',
+      icon: 'success',
+      showConfirmButton: false,
+      html:
+          'Anda Berhasil Mengisi Usulan Ijin Hari',
+      timer: 2000,
+  })
+  .then(function (result) {
+      window.location.href = "../asn/"+get_nip;
+  })
+}else{
+  swal("Error occured !");
+}  
+}
+
+  $('#osm-map').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+$(window).on('load', function(){
+  setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+});
+function removeLoader(){
+    $( "#loadingDiv" ).fadeOut(500, function() {
+      // fadeOut complete. Remove the loading div
+      $( "#loadingDiv" ).remove(); //makes page more lightweight 
+  });  
+}</script>
+<style>
+      .loader,
+        .loader:after {
+            border-radius: 50%;
+            width: 10em;
+            height: 10em;
+        }
+        .loader {            
+            margin: 60px auto;
+            font-size: 10px;
+            position: relative;
+            text-indent: -9999em;
+            border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-left: 1.1em solid #ffffff;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-animation: load8 1.1s infinite linear;
+            animation: load8 1.1s infinite linear;
+        }
+        @-webkit-keyframes load8 {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes load8 {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        #loadingDiv {
+            position:absolute;;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background-color:#000;
+        }
+</style>

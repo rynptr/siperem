@@ -1,0 +1,192 @@
+<%- include('partials/header'); -%>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+      <%- include('partials/sidebar'); -%> 
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+   
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            
+          </div>
+          <!-- Card stats -->
+          
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Grafik Usulan Perawatan</h3><br>
+
+                       <!-- Chart -->
+              <div class="chart">
+                  <!-- Chart wrapper -->
+                  <canvas id="chart-bars" class="chart-canvas"></canvas>
+                </div> 
+                </div>
+            
+              </div>
+            </div>
+           
+        
+          </div>
+
+          <div class="card">
+              <div class="card-header border-0">
+                <div class="row align-items-center">
+                  <div class="col">
+                     <h3 class="mb-0">Grafik Usulan Pembangunan</h3><br>
+                  
+                       <!-- Chart -->
+              <div class="chart">
+                  <!-- Chart wrapper -->
+                  <canvas id="chart-bars" class="chart-canvas"></canvas>
+                </div>
+              </div>
+             
+          
+            </div>
+        </div>
+        
+      </div>
+      <!-- Footer -->
+      <%- include('partials/footer'); -%>  
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="../assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="../assets/js/argon.js?v=1.2.0"></script>
+</body>
+
+</html>
+
+
+<script>
+
+$( document ).ready(function() {
+  $( "#grapik" ).click(function() {  
+            $( "#grapik_body" ).toggle( "slow", function() {
+            });
+        });
+    load_data();
+    //jumlahusulan();
+    //jumlahusulanditerima();
+    //jumlahusulanditolak();
+  });
+  
+  
+  function load_data(){
+    
+    $.getJSON('../listusulan/', null, function(data) {
+      const thead = $("#tabel_kehadiran thead");
+      const tbody = $("#tabel_kehadiran tbody");
+      let tr = $("<tr />");
+      tr.append("<th scope='col' class='sort'>No</th>")
+      //$.each(Object.keys(data[0]), function(_, key) {
+      tr.append("<th scope='col' class='sort'>Tgl Usulan</th>")  
+      tr.append("<th scope='col' class='sort'>Kota</th>")
+      tr.append("<th scope='col' class='sort'>Desa</th>")
+      tr.append("<th scope='col' class='sort'>Lokasi</th>")
+      tr.append("<th scope='col' class='sort'>Tingkat Kerusakan</th>")
+      tr.append("<th scope='col' class='sort'>Status Usulan</th>")
+      tr.append("<th scope='col' class='sort'>View</th>")
+      //tr.append("<th scope='col' class='sort'>Ijin</th>")
+      //tr.append("<th scope='col' class='sort'>Logbook</th>")
+      //});
+      tr.appendTo(thead);
+      var no = 1
+      $.each(data, function(_, obj) {
+        tr = $("<tr/>");
+        tr.append("<td>" + no++ + "</td>")
+        tr.append("<td>" + FormatDate(obj.tgl_usulan) + "</td>")
+        tr.append("<td>" + obj.kota + "</td>")
+        tr.append("<td>" + obj.desa + "</td>")
+        tr.append("<td>" + obj.alamat + "</td>")
+        tr.append("<td>" + obj.status + "</td>")
+        tr.append("<td id=info_status>" + statususulan(obj.stat) + "</td>")
+        tr.append("<td><button type='button' class='btn btn-sm btn-neutral' onclick='detail("+obj.id+");''>Detail</button></td>")
+        tr.appendTo(tbody);
+      });
+    });
+  
+  }
+
+
+function detail(id){ 
+    window.location.href = "http://localhost:3000/monitoring/"+id;
+
+}
+
+
+function statususulan(stat) {
+    if(stat =='1'){
+      stat = '<span class="badge badge-success">Usulkan ke Pusat</span>';
+    }else if(stat =='2'){
+      stat = '<span class="badge badge-danger">Ditolak</span>';  
+    }else if(stat =='0'){
+      stat = '<span class="badge badge-secondary">Menunggu</span>';
+    }
+    return stat;
+ }
+
+function jumlahusulan(){
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/jumlahusulan",
+      dataType: "json",
+      success: function (data) {
+          var jumlahusulan = data[0].jumlah_usulan; 
+          $('#jumlahusulan').text(jumlahusulan);
+      }
+  });
+ }
+
+ function jumlahusulanditerima(){
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/jumlahusulanditerima",
+      dataType: "json",
+      success: function (data) {
+          var jumlahusulanditerima = data[0].jumlah_usulan; 
+          $('#jumlahusulanditerima').text(jumlahusulanditerima);
+      }
+  });
+ }
+
+ function jumlahusulanditolak(){
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/jumlahusulanditolak",
+      dataType: "json",
+      success: function (data) {
+          var jumlahusulanditolak = data[0].jumlah_usulan; 
+          $('#jumlahusulanditolak').text(jumlahusulanditolak);
+      }
+  });
+ }
+  
+  </script>

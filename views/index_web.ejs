@@ -1,0 +1,228 @@
+
+<%- include('partials/header'); -%>
+
+<body id="body_front" class="bg-default">
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header  py-7 py-lg-8 pt-lg-9">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+              <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+              <h1 class="text-white">
+                <a class="navbar-brand" href="dashboard.html">
+                  <img src="../assets/img/logo.png" width="100">
+                </a>
+              </h1>
+             
+              <span class="text-lead text-white">Prototype Aplikasi E-Absensi berbasis GPS dan Face Recognition</span> 
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary border-0 mb-0">
+            <div class="card-header bg-transparent pb-5" style="padding : 0px !important">
+              <div class="text-muted text-center mt-2 mb-3" style="margin-bottom:0px !important">
+                <h3 class="text-dark">Face Recognition</h3>
+              </div>
+            </div>
+            <div class="card-body" style="padding: 0px !important">
+                <iframe width="440" height=350" src="http://localhost:8000/" frameborder="0" allowfullscreen scrolling="no"></iframe>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-5 col-md-7" style=display:none;>
+            <div class="card bg-secondary border-0 mb-0">
+              <div class="card-header bg-transparent pb-5">
+                <div class="text-muted text-center mt-2 mb-3">
+                  <h3 class="text-dark" id="ja">Geolocation</h3>
+                </div>
+              </div>
+              <div class="card-body" style="padding: 5px !important">
+                <div id="osm-map" style="width:100%;height:275px;"></div>
+                
+                <!--<form role="form">
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-pin-3 text-primary"></i></span>
+                      </div>
+                      
+                      <input id="latitude" class="form-control" placeholder="Latitude" disabled >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-pin-3 text-primary"></i></span>
+                      </div>
+                      <input id="longitude" class="form-control" placeholder="longitude" disabled>
+                    </div>
+                  </div>
+  
+                  
+                </form>-->
+              </div>
+              <div class="card-body" style="padding: 5px !important">
+                  <div class="form-group" style="margin-bottom: 0.5rem; float:left; padding:3px;">
+                      <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-pin-3 text-primary"></i></span>
+                        </div>
+                        <input id="latitude" class="form-control" placeholder="latitude" disabled>
+                      </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.5rem; float:left; padding:3px;">
+                        <div class="input-group input-group-merge input-group-alternative">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-pin-3 text-primary"></i></span>
+                          </div>
+                          <input id="longitude" class="form-control" placeholder="longitude" disabled>
+                        </div>
+                      </div>
+              </div>
+            </div>
+  
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <%- include('partials/footer'); -%>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+  getLocation();
+  load_map();
+});  
+
+function notif(type){
+  if (type === 'success-message') {
+    swal({
+      title: 'Success!',
+      text: 'Redirecting in 3 seconds.',
+      type: 'success',
+      timer: 3000,
+      showConfirmButton: false
+    }, function(){
+          window.location.href = "http://localhost:3000/asn/123";
+    });
+  }else{
+    swal("Error occured !");
+  }  
+}
+
+function GetTodayDate() {
+   var tdate = new Date();
+   var dd = tdate.getDate(); //yields day
+   var MM = tdate.getMonth(); //yields month
+   var yyyy = tdate.getFullYear(); //yields year
+   var currentDate= yyyy + "-" +( MM+1) + "-" + dd;
+
+   return currentDate;
+}
+
+
+function GetTime(){
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  if(s<10){
+    s = "0"+s;
+  }
+
+  $("#jam").text(h+" : "+m+" : "+s);
+  setTimeout(function(){getdate()}, 500);
+}
+
+function load_map(){
+      // Where you want to render the map.
+var element = document.getElementById('osm-map');
+
+    // Create Leaflet map on map element.
+    var map = L.map(element);
+
+    // Add OSM tile leayer to the Leaflet map.
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Target's GPS coordinates.
+    var target = L.latLng('-6.9206015999999995', '107.6658176 ');
+
+    // Set map's center to target with zoom 14.
+    map.setView(target, 12);
+
+    // Place a marker on the same location.
+    L.marker(target).addTo(map);
+}
+    
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  var lat = $("#latitude").val(position.coords.latitude);
+  var long = $("#longitude").val(position.coords.longitude);
+
+  //notif('success-message')
+  //post_data_absen(position.coords.latitude,position.coords.longitude)
+  //post_data_absen();
+}
+
+
+function post_data_absen(){
+
+var lat = $("#latitude").val();
+var long = $("#longitude").val(); 
+
+var now = new Date(Date.now());
+var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+
+var formData = {
+  nip:"123",
+  nama:"tesss",
+  keterangan:"WFH",
+  tanggal:GetTodayDate,
+  waktu_masuk:time,
+  waktu_pulang:time,
+  lat:lat,
+  lon:long,
+  image:"image",
+}; //Array 
+ 
+$.ajax({
+    url : "http://localhost:3000/absen",
+    type: "POST",
+    data : formData,
+    success: function(data, textStatus, jqXHR)
+    {
+        //notif('success-message')
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+        console.log(jqXHR);
+        alert('fail' + textStatus.code);
+    }
+});
+}
+</script>
+
+

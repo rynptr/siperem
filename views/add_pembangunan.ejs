@@ -1,0 +1,435 @@
+<%- include('partials/header'); -%>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+      <%- include('partials/sidebar'); -%> 
+  </nav>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+   
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            
+          </div>
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase  mb-0">Jumlah Usulan</h5>
+                      <span class="h2 font-weight-bold mb-0" id="jumlahusulan">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-circle-08"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">Usulan Pembangunan Jembatan</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase  mb-0">Diterima</h5>
+                      <span class="h2 font-weight-bold mb-0" id="jumlahusulanditerima">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                          <i class="ni ni-circle-08"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">Usulan Pembangunan diterima</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase mb-0">Ditolak</h5>
+                      <span class="h2 font-weight-bold mb-0" id="jumlahusulanditolak">-</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                          <i class="ni ni-circle-08"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">Usulan Pembangunan ditolak</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase mb-0">Persentase</h5>
+                      <span class="h2 font-weight-bold mb-0">85,65%</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                          <i class="ni ni-circle-08"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">Persentase Pemeliharan</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+       
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Usulan Pembangunan Jembatan Baru</h3>
+                </div>
+  
+              </div>
+            </div>
+           
+            <div class="card-body" style="padding:0.7rem !important;">
+                
+                   
+                <div class="pl-lg-4" style="padding-right: 1.5rem;">
+                  <div class="row">
+                     
+                          <div id="map" style="width:100%;height:450px;"></div>				
+                    
+                  </div><br>
+                  <div class="row">
+                  
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <label class="form-control-label" for="input-email">Langitude</label>
+                          <input class="form-control" id="form_lan" placeholder="Langitude" required="required" readonly></input>		
+                        
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-last-name">Longitude</label>
+                            <input class="form-control" id="form_lon" placeholder="Longitude" required="required" readonly></input>
+                          
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-username">Nama Jembatan</label>
+                            <input class="form-control" id="form_nama" placeholder="Nama Jembatan" required="required"></input>		
+                          </div>  
+                        </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-email">Lokasi</label>
+                            <input class="form-control" id="form_alamat" placeholder="Isi Alamat" required="required"></input>	
+                          
+                          </div>
+                        </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Panjang Jembatan</label>
+                        <input class="form-control" id="form_panjang" placeholder="Panjang" required="required"></input>	
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-last-name">Lebar Jembatan</label>
+                          <input class="form-control" id="form_lebar" placeholder="Lebar" required="required"></input>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label class="form-control-label" for="input-email">Kota</label>
+                              <input class="form-control" id="form_kota" placeholder="Kota" required="required"></input>	
+                          
+                          </div>
+                        </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <label class="form-control-label" for="input-first-name">Desa</label>
+                          <input class="form-control" id="form_desa" placeholder="Desa" required="required"></input>	
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                        
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-last-name"></label>
+                            <input type="button" class="btn btn-primary btn-block btn-lg" value="Kirim usulan" onclick="post_data_pembangunannip();">
+                        </div>
+                       
+                      </div>   
+                  </div>
+                  
+                  <hr style="margin:0px;">
+                </div>
+            </div>
+
+              
+   
+                    
+    
+          </div>
+        </div>
+        
+      </div>
+          
+      <!-- Footer -->
+      <%- include('partials/footer'); -%>  
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="../assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="../assets/js/argon.js?v=1.2.0"></script>
+
+  
+  <!-- Load Leaflet from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.5.0/dist/esri-leaflet.js"
+    integrity="sha512-ucw7Grpc+iEQZa711gcjgMBnmd9qju1CICsRaryvX7HJklK0pGl/prxKvtHwpgm5ZHdvAil7YPxI1oWPOWK3UQ=="
+    crossorigin=""></script>
+
+  <!-- Load Esri Leaflet Geocoder from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+    crossorigin="">
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+    integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+    crossorigin=""></script>
+   
+</body>
+
+</html>
+
+
+<script>
+
+$( document ).ready(function() {
+    load_map();
+    load_data();
+    jumlahusulan();
+    jumlahusulanditerima();
+    jumlahusulanditolak();
+  });
+  
+  
+  function load_data(){
+    
+    $.getJSON('../listpembangunan/', null, function(data) {
+      const thead = $("#tabel_kehadiran thead");
+      const tbody = $("#tabel_kehadiran tbody");
+      let tr = $("<tr />");
+      tr.append("<th scope='col' class='sort'>No</th>")
+      //$.each(Object.keys(data[0]), function(_, key) {
+      tr.append("<th scope='col' class='sort'>Tgl Usulan</th>")  
+      tr.append("<th scope='col' class='sort'>Kota</th>")
+      tr.append("<th scope='col' class='sort'>Desa</th>")
+      tr.append("<th scope='col' class='sort'>Lokasi</th>")
+      tr.append("<th scope='col' class='sort'>Panjang</th>")
+      tr.append("<th scope='col' class='sort'>Lebar</th>")
+      tr.append("<th scope='col' class='sort'>Status Usulan</th>")
+      tr.append("<th scope='col' class='sort'>View</th>")
+
+      tr.appendTo(thead);
+      var no = 1
+      $.each(data, function(_, obj) {
+        tr = $("<tr/>");
+        tr.append("<td>" + no++ + "</td>")
+        tr.append("<td>" + FormatDate(obj.tgl_usulan) + "</td>")
+        tr.append("<td>" + obj.kota + "</td>")
+        tr.append("<td>" + obj.desa + "</td>")
+        tr.append("<td>" + obj.alamat + "</td>")
+        tr.append("<td>" + obj.panjang + "</td>")
+        tr.append("<td>" + obj.lebar + "</td>")
+        tr.append("<td id=info_status>" + statususulan(obj.stat) + "</td>")
+        tr.append("<td><button type='button' class='btn btn-sm btn-neutral' onclick='detail_pembangunan("+obj.id+");''>Detail</button></td>")
+        tr.appendTo(tbody);
+      });
+    });
+  
+  }
+
+
+function detail_pembangunan(id){ 
+    window.location.href = "http://localhost:3000/pembangunan/"+id;
+
+}
+
+
+function statususulan(stat) {
+    if(stat =='1'){
+      stat = '<span class="badge badge-success">Usulkan ke Pusat</span>';
+    }else if(stat =='2'){
+      stat = '<span class="badge badge-danger">Ditolak</span>';  
+    }else if(stat =='0'){
+      stat = '<span class="badge badge-secondary">Menunggu</span>';
+    }
+    return stat;
+ }
+
+function jumlahusulan(){
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/jumlahusulan",
+      dataType: "json",
+      success: function (data) {
+          var jumlahusulan = data[0].jumlah_usulan; 
+          $('#jumlahusulan').text(jumlahusulan);
+      }
+  });
+ }
+
+ function jumlahusulanditerima(){
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/jumlahusulanditerima",
+      dataType: "json",
+      success: function (data) {
+          var jumlahusulanditerima = data[0].jumlah_usulan; 
+          $('#jumlahusulanditerima').text(jumlahusulanditerima);
+      }
+  });
+ }
+
+ function jumlahusulanditolak(){
+    $.ajax({
+      type: "GET",
+      url: "http://localhost:3000/jumlahusulanditolak",
+      dataType: "json",
+      success: function (data) {
+          var jumlahusulanditolak = data[0].jumlah_usulan; 
+          $('#jumlahusulanditolak').text(jumlahusulanditolak);
+      }
+  });
+ } 
+  
+
+ function load_map(){
+ var map = L.map('map').setView([0,0], 2);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: ''
+  }).addTo(map);
+
+  // Target's GPS coordinates.
+  var target = L.latLng('-6.9206015999999995', '107.6658176 ');
+
+  // Set map's center to target with zoom 14.
+  map.setView(target, 12);
+
+  var gcs = L.esri.Geocoding.geocodeService();
+
+
+  map.on('click', (e)=>{
+    gcs.reverse().latlng(e.latlng).run((err, res)=>{
+      if(err) return;
+      //alert(res.latlng.lat);
+      $('#form_lan').val(res.latlng.lat);
+      //alert(res.latlng.lng);
+      $('#form_lon').val(res.latlng.lng);
+      L.marker(res.latlng).addTo(map).bindPopup(res.address.Match_addr).openPopup();
+    });
+  });
+}
+
+
+function post_data_pembangunannip(){
+    var nama = $("#form_nama").val();
+    var kota = $("#form_kota").val();
+    var desa = $("#form_desa").val();
+    var alamat = $("#form_alamat").val();
+    var panjang = $("#form_panjang").val();
+    var lebar = $("#form_lebar").val();
+    var lat = $("#form_lan").val();
+    var long = $("#form_lon").val(); 
+    var stat = '0';
+    //var now = new Date(Date.now());
+    //var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+
+    var tgl_usulan = GetTodayDate();
+
+    var formData = {
+        tgl_usulan:tgl_usulan,
+        nama:nama,
+        kota:kota,
+        desa:desa,
+        alamat:alamat,
+        lat:lat,
+        lon:long,
+        panjang:panjang,
+        lebar:lebar,
+        stat:stat
+    }; 
+    
+    $.ajax({
+        url : "http://localhost:3000/tambah_pembangunan",
+        type: "POST",
+        dataType: "json",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+            notif('success-message')
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(jqXHR);
+            alert('fail' + textStatus.code);
+        }
+    });
+ }
+
+  </script>

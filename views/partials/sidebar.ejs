@@ -1,0 +1,84 @@
+<div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center" style="font-size: 15px">
+          <a class="navbar-brand" href="javascript:void(0)">
+            <img src="../assets/img/logo.png" class="navbar-brand-img" style="height:100px; width:100px;">
+          </a>
+          <i class="ni education_hat mr-2"></i>Sistem Perencanaan Pembangunan dan Perawatan Jembatan
+  
+        </div>
+        <div class="navbar-inner">
+          <!-- Collapse -->
+          <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+            <!-- Nav items -->
+            <ul class="navbar-nav">
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="#" onclick="link_dashboard();">
+                     <i class="ni ni-tv-2 text-primary"></i>
+                     <span class="nav-link-text">Monitoring</span>
+                   </a>
+                 </li>-->
+              <li class="nav-item">
+                 <a class="nav-link" href="#" onclick="link_perawatan();">
+                  <i class="ni ni-tv-2 text-primary"></i>
+                  <span class="nav-link-text">Perawatan</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#myModal_form" onclick="link_pembangunan();">   
+                  <i class="ni ni-tv-2 text-primary"></i>
+                  <span class="nav-link-text">Pembangunan
+                  </span>
+                </a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <i class="ni ni-single-02 text-yellow"></i>
+                  <span class="nav-link-text">Logout</span>
+                </a>
+              </li>
+  
+            </ul>
+  
+  
+          </div>
+        </div>
+      </div>
+
+ <script>
+function post_data_ijin(){
+    var get_nip = $("#get_nip").val(); 
+    var jenis_ijin = $("#jenis_ijin").val(); 
+    var tanggal_dari = $("#tanggal_dari").val(); 
+    var tanggal_sampai = $("#tanggal_sampai").val(); 
+    var alasan = $('#alasan').val();
+   
+    var formData = {
+        nip:get_nip,
+        tanggal_dari:tanggal_dari,
+        tanggal_sampai:tanggal_sampai,
+        jenis_ijin:jenis_ijin,
+        alasan:alasan,
+        approve:"0",
+    }; 
+
+    //notif_ijin('ijin');  
+    
+    $.ajax({
+        url : "https://sikadir.k-7.monster/ijin_form",
+        type: "POST",
+        dataType: "json",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+            notif_ijin('ijin');  
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(jqXHR);
+            alert('fail' + textStatus.code);
+        }
+    });
+ }
+ </script>
