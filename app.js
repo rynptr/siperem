@@ -1,8 +1,14 @@
 var express = require('express'),
-app = express(),
-port = process.env.PORT || 3000,
-bodyParser = require('body-parser'),
-controller = require('./controller');
+    jwt = require('jsonwebtoken'),
+    app = express(),
+    port = process.env.PORT || 3000,
+    bodyParser = require('body-parser'),
+    controller = require('./controller');
+
+
+var cors = require('cors');
+app.use(cors());   
+
 
 // set tampilan mesin untuk nodejs
 app.set('view engine', 'ejs');
