@@ -1,12 +1,12 @@
 {
-  "name": "eabsen",
+  "name": "siperem",
   "version": "1.0.0",
-  "description": "k7-eabsen",
-  "main": "index.js",
+  "description": "k1-siperem",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "k7-lti2020",
+  "author": "k1-lti2021",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
