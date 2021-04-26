@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
@@ -11,6 +12,15 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
     },
+=======
+"dev": "react-scripts start",
+"start": "serve -s build",
+"build": "react-scripts build",
+"test": "react-scripts test --env=jsdom",
+"eject": "react-scripts eject",
+"heroku-postbuild": "npm run build"
+},
+>>>>>>> d7f3f02ad1296f6b5dd65fdf506c8bf78e2d4dc2
   "author": "RianPutra",
   "license": "ISC",
   "dependencies": {
