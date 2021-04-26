@@ -1,7 +1,7 @@
 var express = require('express'),
     jwt = require('jsonwebtoken'),
     app = express(),
-    port = process.env.PORT || 3000,
+    port = process.env.PORT || 4000,
     bodyParser = require('body-parser'),
     controller = require('./controller');
 
@@ -21,8 +21,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-//app.use(express.static('public'));
-app.use('/', express.static(path.join(__dirname, 'dist')))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
