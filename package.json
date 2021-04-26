@@ -4,7 +4,7 @@
   "description": "k1-siperem",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "k1-lti2021",
   "license": "ISC",
