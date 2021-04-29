@@ -14,7 +14,7 @@
               timer: 2000,
           })
           .then(function (result) {
-              window.location.href = "../pembangunan/";
+              window.location.href = "https://siperem.herokuapp.com/pembangunan/";
           })
         }else{
           swal("Error occured !");
@@ -64,76 +64,7 @@
    //setTimeout(function(){getdate()}, 500);
  }
 
- function cek_data(nip){
-    
-    $.ajax({
-        type: "GET",
-        url: "https://sikadir.k-7.monster/cekabsen/"+nip,
-        dataType: "json",
-        success: function (data) {
-            var cek_data = data[0].cek_data;
-            get_nama(nip,cek_data); 
-	           
-        }
-    }); 
- }
-
- 
- function get_nama(nip,cek_data){
-//alert('get_nama');
-	
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "https://simpeg.k-7.monster/asn?nip="+nip,
-        dataType: "json",
-        success: function (data) {
-            var nama = data[0].nama; 
-            if(cek_data =='0'){
-                //alert('post');
-                post_data_absen(nip,nama)    
-            }else{
-                //alert('update');
-                update_data_absen(nip,nama)        
-            }
-            
-        }
-    }); 
- }
  
  
-
- function update_data_absen(nip,nama){
-    var lat = $("#latitude").val();
-    var long = $("#longitude").val(); 
-
-    var now = new Date(Date.now());
-    var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-
-    var tanggal = GetTodayDate();
-
-    var formData = {
-        nip:nip,
-        waktu_pulang:time,
-        tanggal:tanggal
-    }; 
-    
-    $.ajax({
-        url : "https://sikadir.k-7.monster/absen",
-        type: "PUT",
-        dataType: "json",
-        data : formData,
-        success: function(data, textStatus, jqXHR)
-        {
-            notif('success-message',nip,nama,tanggal,time)
-            
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            console.log(jqXHR);
-            alert('fail' + textStatus.code);
-        }
-    });
- }
-
+ 
 
